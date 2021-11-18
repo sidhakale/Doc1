@@ -34,10 +34,10 @@ stages {
         stage('Terraform Plan') {
             steps {
                      withCredentials([vaultString(credentialsId: 'AWS_SECRET_ACCESS_KEY_VAULT', variable: 'AWS_ACCESS_KEY_ID'), vaultString(credentialsId: 'AWS_SECRET_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                bat 'cd&cd terraform/Terra-Ansi-jFrog & terraform init -input=false'
-                bat 'cd&cd terraform/Terra-Ansi-jFrog & terraform destroy -auto-approve'
-                bat "cd&cd terraform/Terra-Ansi-jFrog & terraform plan -input=false -out tfplan"
-                bat 'cd&cd terraform/Terra-Ansi-jFrog & terraform show -no-color tfplan > tfplan.txt'
+                bat 'cd&cd terraform/Pipeline1 & terraform init -input=false'
+                bat 'cd&cd terraform/Pipeline1 & terraform destroy -auto-approve'
+                bat "cd&cd terraform/Pipeline1 & terraform plan -input=false -out tfplan"
+                bat 'cd&cd terraform/Pipeline1 & terraform show -no-color tfplan > tfplan.txt'
                      }
             }
         }
@@ -46,7 +46,7 @@ stages {
         stage('Terraform Apply') {
             steps {
                     withCredentials([vaultString(credentialsId: 'AWS_SECRET_ACCESS_KEY_VAULT', variable: 'AWS_ACCESS_KEY_ID'), vaultString(credentialsId: 'AWS_SECRET_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                bat "cd&cd terraform/Terra-Ansi-jFrog & terraform apply -input=false tfplan"
+                bat "cd&cd terraform/Pipeline1 & terraform apply -input=false tfplan"
                     }
             }
         }
