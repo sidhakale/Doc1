@@ -1,0 +1,27 @@
+---
+- hosts: localhost 
+  connection: local
+  tasks:
+    - name: update repos
+      yum:
+        name: "*"
+        state: "latest"
+    - name: Installing openJDK
+      yum:
+        name: java-1.8.0-openjdk        
+    - name: Setting default java
+      alternatives:
+        name: java
+        link: /usr/bin/java
+        path: /usr/lib/jvm/jre-1.8.0-openjdk-1.8.0.302.b08-0.amzn2.0.1.x86_64/bin/java
+    - name: Downloading tomcat
+      get_url:
+        url: "https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.72/bin/apache-tomcat-8.5.72.tar.gz"
+        dest: /usr/local
+    - name: Extracting downloaded tar file
+      unarchive:
+        src: "/usr/local/apache-tomcat-8.5.72.tar.gz"  
+        dest: /usr/local
+        remote_src: yes
+    - name: Renaming tomcat home
+      command: mv /usr/local/apache-tomcat-8.5.72 /usr/local/tomcat
