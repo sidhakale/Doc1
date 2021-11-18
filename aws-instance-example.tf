@@ -2,7 +2,7 @@ resource "aws_instance" "web1" {
    ami           = "ami-0c2b8ca1dad447f8a"
    instance_type = "t2.micro"
    count = 1
-  vpc_security_group_ids = ["sg-09a92b159eb276c66"]
+  vpc_security_group_ids = ["vpc-0e69561ef38533cea"]
    key_name               = "KeyPairNV" 
    iam_instance_profile =   "EC2Role"
    user_data = <<-EOF
