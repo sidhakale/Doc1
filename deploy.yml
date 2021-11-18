@@ -1,0 +1,10 @@
+---
+- hosts: localhost 
+  connection: local
+  tasks:
+    - name: copy war into tomcat
+      copy:
+        src: Java-Ansible.war
+        dest: /usr/local/tomcat/webapps
+    - name: Starting tomcat
+      shell: nohup /usr/local/tomcat/bin/startup.sh &
